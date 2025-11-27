@@ -5,7 +5,6 @@ import json
 
 # --- НАСТРОЙКИ ---
 API_KEY = "sk-..."  # Вставьте сюда ваш ключ OpenAI
-# Если используете Gemini, код инициализации будет чуть другим, но логика та же.
 
 client = OpenAI(api_key=API_KEY)
 
@@ -24,19 +23,20 @@ SYSTEM_PROMPT = """
 
 # ФОРМАТ ОТВЕТА (JSON)
 {
-  "reviews": [
+    "reviews": [
     {
       "line_number": integer, 
       "severity": "CRITICAL" | "WARNING",
       "message": "Описание проблемы (RU)",
       "code_suggestion": "Исправленный код"
     }
-  ],
-  "general_summary": "Вердикт"
+    ],
+    "general_summary": "Вердикт"
 }
 """
-
+    
 def test_code_review():
+    
     # 1. Читаем плохой код
     with open("bad_code.py", "r") as f:
         code_content = f.read()
@@ -68,6 +68,6 @@ def test_code_review():
     
     print("\n--- 🤖 РЕЗУЛЬТАТ РЕВЬЮ ---")
     print(json.dumps(parsed, indent=2, ensure_ascii=False))
-
-if __name__ == "__main__":
+    
+    if __name__ == "__main__":
     test_code_review()
